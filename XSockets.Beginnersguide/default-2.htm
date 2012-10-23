@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <!-- Added references to jQuery & XSockets - NOTE: did not add the fallback for IE //-->
+    <script src="Scripts/jquery-1.7.2.js" type="text/javascript"></script>
+    <script src="Scripts/jXSockets.2.0.3.js" type="text/javascript"></script>
+    
+    <script>
+
+        //A variable for the websocket connection
+        var ws = null;
+        
+        //This tells us that the document is ready... So in there we create our XSockets stuff
+        $(function () {
+
+            //We connect to localhost and the port 4502 (default).
+            //We also say that the controller is named GeoLocation.
+            //All this can be setup in the configuration to run on another machine, allow certain origins etc.
+            ws = new XSockets.WebSocket("ws://127.0.0.1:4502/GeoLocation");
+
+            //Listen (subscribe/bind) for the predefined open event
+            ws.bind(XSockets.Events.open, function (client) {
+                //Just write the info to the console (view it with ctrl+shift+j in chrome) 
+                console.log('Connected', client);
+            });
+
+            //We also listen for any errors
+            ws.bind(XSockets.Events.onError, function (err) {
+                console.log('Error', err);
+            });
+
+            //listen for sendtoall
+            ws.bind('sendtoall', function (data) {
+                //We output the message on the top in the log div
+                $('#log').prepend($("<p>").text('Message To Everyone: ' + data.Message));
+            });
+
+            //GUI events
+            $('#send').bind('click', function () {
+                //send a message and pass in a JSON object with only one property.. Message that is collected from the message input field
+                var json = {
+                    Message: $('#message').val()
+                };
+                ws.trigger('sendtoall', json);
+            });
+        });
+
+    </script>
+</head>
+    <body>
+        <!-- Input filed for message //-->
+        <input type="text" id="message" placeholder="Write message here"/>
+        <!-- Click to send - see jQuery above for id send //-->
+        <button id="send">SendToAll</button>
+        <div id="log"></div>
+    </body>
+</html>
