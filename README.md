@@ -9,7 +9,7 @@ In this tutorial you get to know the JavaScript API as well as the ServerSide pl
 # For who´?
 Anyone interested in realtime development with knowledge of C# and JavaScript
 
-# Dont want to read the reademe.txt :)
+# Dont want to read the readme.txt :)
 Well, then just do this...
 - Create a new MVC3 project
 - Run "Install-Package XSockets"
