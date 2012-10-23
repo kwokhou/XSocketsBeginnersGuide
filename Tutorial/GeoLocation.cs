@@ -84,6 +84,9 @@ namespace XSocketHandler
         {
             try
             {
+		//Note: this will hit the binding in the client that listens for 'SendToCity'
+		//Note: BUT... It will only be sent to the "nodes" with the property City set to the city in the passed in ViewModel.
+		//Note: This way we can target specific cients without binding to specific subjects.
                 this.SendTo(n => ((GeoLocation)n.XSocket).ViewModel.City == model.City, model, "SendToCity");
             }
             catch (Exception ex)
