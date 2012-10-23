@@ -43,7 +43,7 @@ namespace XSocketHandler
         /// ___________________________
         /// It can be called from the javascript API like this.
         /// var json = {
-        ///        City: $('#cities').val()
+        ///        City: 'Sundsvall'
         ///     };
         /// ws.trigger('setcity', json);
         /// 
@@ -72,8 +72,8 @@ namespace XSocketHandler
         /// <summary>
         /// Another "actionmethod" that you can trigger from the JsAPI like.
         /// var json = {
-        ///        Message: $('#message').val(),
-        ///        City: $('#cities').val()
+        ///        Message: 'Hello Sundsvall',
+        ///        City: 'Sundsvall'
         ///     };
         /// ws.trigger('sendtocity', json);
         /// 
